@@ -113,12 +113,39 @@ class Trainer:
           else:
             print(trainers[i].name + ", pick your pokemon.")
         else:
-          if i < len(trainers)-1:
+          if i < len(trainers) - 1:
             continue
           else:
             print(opponent + "is not around you.")
 
+  def add_pokemon(self):
+    print("Available Pokemons:")
+    print(available_pokemons)
+    selected_pokemon = input("Select your Pokemon: ")
+    selected_pokemon = selected_pokemon.title()
 
+    if len(available_pokemons) > 0:
+      for i in range(0, len(available_pokemons)):
+        if selected_pokemon == available_pokemons[i].name:
+          if not available_pokemons[i] in self.pokemons:
+            self.pokemons.append(available_pokemons.pop(i))
+            print(selected_pokemon + " was added to your hand")
+            print("Your pokemons:")
+            print(self.pokemons)
+            break
+          else:
+            print("You have " + selected_pokemon + " in your hand already.")
+            break
+        else:
+          if i < len(available_pokemons) - 1:
+            continue
+          else:
+            print("This pokemon is not available")
+    else:
+      print("No pokemons available")
+
+  def revive_act(self):
+    self.act_pokemon.revive()
 
 
 
