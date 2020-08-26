@@ -47,13 +47,13 @@ class Pokemon:
       return other_pokemon.faint()
     elif damage == self.atk:
       other_pokemon.lose_health(damage)
-      return self.name + " have dealt " + str(damage) + " dmg to " + other_pokemon.name + ". It Was Not Very Effective!"
+      return print(self.name + " have dealt " + str(damage) + " dmg to " + other_pokemon.name + ". It Was Not Very Effective!")
     else:
       other_pokemon.lose_health(damage)
-      return self.name + " have dealt " + str(damage) + " dmg to " + other_pokemon.name + ". It Was Super Effective!"
+      return print(self.name + " have dealt " + str(damage) + " dmg to " + other_pokemon.name + ". It Was Super Effective!")
 
 class Trainer:
-  def __init__(self, name, act_pokemon = "N/A"):
+  def __init__(self, name, act_pokemon = ""):
     self.name = name
     self.pokemons = []
     self.act_pokemon = act_pokemon
@@ -75,15 +75,15 @@ class Trainer:
 
   def pick_pokemon(self):
     print("Your pokemons in hand: " + str(self.pokemons))
-    poke_input = input("Pick one")
+    poke_input = input("Pick one: ")
     pokemon = poke_input.title()
     if len(self.pokemons) > 0:
       for i in range(0, len(self.pokemons)):
-        if pokemon == self.pokemons[i] and self.pokemons[i].fainted == False:
+        if pokemon == self.pokemons[i].name and self.pokemons[i].fainted == False:
           self.act_pokemon = self.pokemons[i]
           print(pokemon + " is your current pokemon")
           break
-
+        else:
           if i < len(self.pokemons)-1:
             continue
           else:
@@ -101,22 +101,22 @@ class Trainer:
     else:
       for i in range(0, len(trainers)):
         if opponent == trainers[i].name:
-          if self.act_pokemon != "N/A" and trainers[i].act_pokemon != "N/A":
-            print(self.name + " and " + trainers[i].name + " are going to fight, get ready:" + self.act_pokemon.upper() + " VS " + trainers[i].act_pokemon.upper())
-            self.act_pokemon.attack(attack_trainer[i].act_pokemon)
+          if self.act_pokemon != "" and trainers[i].act_pokemon != "":
+            print(self.name + " and " + trainers[i].name + " are going to fight, get ready: " + self.act_pokemon.name + " VS " + trainers[i].act_pokemon.name)
+            self.act_pokemon.attack(trainers[i].act_pokemon)
             break
           else:
-            if self.act_pokemon == "N/A" and trainers[i].act_pokemon == "N/A":
-            print("You cannot have a fist fight, use pokemons instead. Choose your pokemons!")
-          elif: self.act_pokemon == "N/A":
-            print(self.name + ", pick your pokemon.")
-          else:
-            print(trainers[i].name + ", pick your pokemon.")
+            if self.act_pokemon == "" and trainers[i].act_pokemon == "":
+              print("You cannot have a fist fight, use pokemons instead. Choose your pokemons!")
+            elif self.act_pokemon == "":
+              print(self.name + ", pick your pokemon.")
+            else:
+              print(trainers[i].name + ", pick your pokemon.")
         else:
           if i < len(trainers) - 1:
             continue
           else:
-            print(opponent + "is not around you.")
+            print(opponent + " is not around you.")
 
   def add_pokemon(self):
     print("Available Pokemons:")
@@ -169,14 +169,18 @@ available_pokemons = [charmander, squirtle, bulbasaur, blastoise, vulpix, psyduc
 
 
 
+print(ash.add_pokemon())
+print(ash.pick_pokemon())
+print(brock.add_pokemon())
+print(brock.pick_pokemon())
 
-print(squirtle)
-print(charmander)
-print(bulbasaur)
-print(blastoise)
+print(ash.name)
+print(brock.pokemons)
+print(brock.act_pokemon)
 
+print(brock.name)
+print(ash.pokemons)
+print(ash.act_pokemon)
 
-
-
-print(ash)
+print(ash.attack_trainer())
 
